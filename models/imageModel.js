@@ -1,15 +1,18 @@
 module.exports = (sequelize, DataTypes) => {
     const Image = sequelize.define("image", {
-        nom: {
+        url1: {
             type: DataTypes.STRING,
             allowNull: false,
-            unique: true
         },
-        description: {
-            type: DataTypes.TEXT,
+        url2: {
+            type: DataTypes.STRING,
             allowNull: false,
         },
-        url: {
+        url3: {
+            type: DataTypes.STRING,
+            allowNull: false,
+        },
+        url4: {
             type: DataTypes.STRING,
             allowNull: false,
         },

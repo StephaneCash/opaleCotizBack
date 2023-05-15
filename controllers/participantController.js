@@ -96,6 +96,8 @@ const deleteParticipant = async (req, res) => {
     }
 };
 
+
+
 module.exports = {
     getAllParticipants,
     createParticipant,

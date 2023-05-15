@@ -4,7 +4,7 @@ const { ValidationError, UniqueConstraintError, ValidationErrorItem } = require(
 const getAllImages = async (req, res) => {
     try {
         let images = await db.images.findAll({
-            include:[{
+            include: [{
                 model: db.cagnottes,
                 as: "cagnotte"
             }]
@@ -20,13 +20,15 @@ const getAllImages = async (req, res) => {
 
 const createImage = async (req, res) => {
     try {
-        const { nom, description, cagnotteId } = req.body;
-        if (req.file) {
+        const { cagnotteId } = req.body;
+        console.log(req.files , " REQ FILES")
+        if (req.files) {
             let newImage = await db.images.create({
-                nom: nom,
-                description: description,
                 cagnotteId: cagnotteId,
-                url: `api/${req.file.path}`
+                url1: `api/${req.files[0].path}`,
+                url2: `api/${req.files[1].path}`,
+                url3: `api/${req.files[2].path}`,
+                url4: `api/${req.files[3].path}`
             });
             res.status(201).json({ message: "Image créée avec succès", data: newImage })
         } else {
