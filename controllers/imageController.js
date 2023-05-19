@@ -21,16 +21,16 @@ const getAllImages = async (req, res) => {
 const createImage = async (req, res) => {
     try {
         const { cagnotteId } = req.body;
-        console.log(req.files , " REQ FILES")
+        let data = [];
         if (req.files) {
-            let newImage = await db.images.create({
-                cagnotteId: cagnotteId,
-                url1: `api/${req.files[0].path}`,
-                url2: `api/${req.files[1].path}`,
-                url3: `api/${req.files[2].path}`,
-                url4: `api/${req.files[3].path}`
-            });
-            res.status(201).json({ message: "Image créée avec succès", data: newImage })
+            for (let i = 0; i < req.files.length; i++) {
+                let newImage = await db.images.create({
+                    cagnotteId: cagnotteId,
+                    url: `api/${req.files[i].path}`,
+                });
+                data.push(newImage)
+            }
+            res.status(201).json(data)
         } else {
             let newImage = await db.images.create(req.body);
             res.status(201).json({ message: "Image créée avec succès", data: newImage })

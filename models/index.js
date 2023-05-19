@@ -35,7 +35,6 @@ db.users = require("./userModel")(sequelize, DataTypes);
 db.categories = require("./categorieModel")(sequelize, DataTypes);
 db.cagnottes = require("./cagnotteModel")(sequelize, DataTypes);
 db.images = require("./imageModel")(sequelize, DataTypes);
-db.devises = require("./deviseModel")(sequelize, DataTypes);
 db.participants = require("./participantsModel")(sequelize, DataTypes);
 db.participant_cagnotte = require("./participant_cagnotteModel")(sequelize, DataTypes);
 
@@ -45,16 +44,6 @@ db.categories.hasMany(db.cagnottes, { as: 'cagnottes', });
 db.cagnottes.belongsTo(db.categories, {
     foreignKey: "categorieId",
     as: 'categorie'
-});
-
-// RELATION 1-N DEVISE-CAGNOTTE
-db.cagnottes.hasMany(db.devises, {
-    as: "devises"
-});
-
-db.devises.belongsTo(db.cagnottes, {
-    foreignKey: "cagnotteId",
-    as: "cagnotte"
 });
 
 // RELATION N-N PARTICIPANT / CAGNOTTE

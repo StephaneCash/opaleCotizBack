@@ -14,10 +14,6 @@ const getAllCagnottes = async (req, res) => {
                     as: "images"
                 },
                 {
-                    model: db.devises,
-                    as: "devises"
-                },
-                {
                     model: db.participants,
                     as: "participants"
                 }
@@ -45,18 +41,9 @@ const createCagnotte = async (req, res) => {
                 montant: montant,
                 dateDebut: dateDebut,
                 dateFin: dateFin,
+                devise: devise,
                 url: `api/${req.file.path}`
             });
-
-            let devises = devise && devise.split(",");
-
-            for (let i = 0; i < devises.length; i++) {
-                await db.devises.create({
-                    nom: devises[i],
-                    montant: montant,
-                    cagnotteId: newCagnotte.id,
-                });
-            }
 
             res.status(201).json(newCagnotte);
         } else {
@@ -88,7 +75,22 @@ const createCagnotte = async (req, res) => {
 const getOneCagnotte = async (req, res) => {
     try {
         let id = req.params.id;
-        let cagnotteFind = await db.cagnottes.findOne({ where: { id: id } });
+        let cagnotteFind = await db.cagnottes.findByPk(id, {
+            include: [
+                {
+                    model: db.categories,
+                    as: "categorie"
+                },
+                {
+                    model: db.images,
+                    as: "images"
+                },
+                {
+                    model: db.participants,
+                    as: "participants"
+                }
+            ]
+        });
 
         if (cagnotteFind) {
             res.status(200).json({ message: "Cagnotte trouvée avec succès", data: cagnotteFind });
@@ -106,7 +108,7 @@ const updateCagnotte = async (req, res) => {
         let findCagnotte = await db.cagnottes.findOne({ where: { id: id } });
 
         if (findCagnotte) {
-            const { title, description, link, categorieId, montant } = req.body;
+            const { title, description, link, categorieId, montant, devise } = req.body;
 
             if (req.file) {
                 let cagnotteUpdate = await findCagnotte.update({
@@ -114,6 +116,7 @@ const updateCagnotte = async (req, res) => {
                     description: description,
                     link: link,
                     categorieId: categorieId,
+                    devise: devise,
                     montant: montant,
                     url: `api/${req.file.path}`
                 }, {
@@ -143,11 +146,11 @@ const updateCagnotte = async (req, res) => {
 const deleteCagnotte = async (req, res) => {
     try {
         let id = req.params.id;
-        let findCagnotte = await db.Cagnottes.findOne({ where: { id: id } });
+        let findCagnotte = await db.cagnottes.findByPk(id);
 
         if (findCagnotte) {
-            let CagnotteDel = await db.Cagnottes.destroy({ where: { id: id } });
-            if (CagnotteDel === 1) {
+            let cagnotteDel = await db.cagnottes.destroy({ where: { id: id } });
+            if (cagnotteDel === 1) {
                 res.status(200).json({ message: "Cagnotte a été supprimé avec succès", data: findCagnotte });
             }
         } else {

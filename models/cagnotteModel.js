@@ -29,6 +29,10 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.DATE,
             allowNull: true,
         },
+        devise: {
+            type: DataTypes.STRING,
+            allowNull: true,
+        }
     });
 
     return Cagnotte;
