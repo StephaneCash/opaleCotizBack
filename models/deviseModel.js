@@ -6,11 +6,9 @@ module.exports = (sequelize, DataTypes) => {
         },
         description: {
             type: DataTypes.STRING,
-            allowNull: false,
         },
         montant: {
             type: DataTypes.STRING,
-            allowNull: false,
         },
     });
 

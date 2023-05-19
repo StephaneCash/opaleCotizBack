@@ -35,7 +35,7 @@ const getAllCagnottes = async (req, res) => {
 
 const createCagnotte = async (req, res) => {
     try {
-        const { title, description, link, categorieId, montant, dateDebut, dateFin } = req.body;
+        const { title, description, link, categorieId, montant, dateDebut, dateFin, devise } = req.body;
         if (req.file) {
             let newCagnotte = await db.cagnottes.create({
                 title: title,
@@ -47,6 +47,17 @@ const createCagnotte = async (req, res) => {
                 dateFin: dateFin,
                 url: `api/${req.file.path}`
             });
+
+            let devises = devise && devise.split(",");
+
+            for (let i = 0; i < devises.length; i++) {
+                await db.devises.create({
+                    nom: devises[i],
+                    montant: montant,
+                    cagnotteId: newCagnotte.id,
+                });
+            }
+
             res.status(201).json(newCagnotte);
         } else {
             let newCagnotte = await db.cagnottes.create(req.body);
