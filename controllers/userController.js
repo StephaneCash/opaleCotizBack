@@ -40,8 +40,7 @@ const createUser = async (req, res) => {
                         dataUser.role = role;
 
                         db.users.create(dataUser).then(value => {
-                            let message = `Utilisateur créé avec succès`;
-                            res.status(201).json({ message: message, data: value });
+                            res.status(201).json(value);
                         }).catch(err => {
                             if (err instanceof ValidationError) {
                                 return res.status(400).json({
