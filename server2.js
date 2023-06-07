@@ -28,6 +28,7 @@ app.use("/api/documents-admin", documentsRoutes);
 
 app.use("/api/uploads", express.static('./uploads'));
 
-app.listen(process.env.PORT, () => {
-    console.log("Le serveur tourne sur le port ", + process.env.PORT);
+const PORT = 5006;
+app.listen(PORT, () => {
+    console.log("Le serveur tourne sur le port ", + PORT);
 });
