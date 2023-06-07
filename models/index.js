@@ -35,6 +35,7 @@ db.users = require("./userModel")(sequelize, DataTypes);
 db.categories = require("./categorieModel")(sequelize, DataTypes);
 db.cagnottes = require("./cagnotteModel")(sequelize, DataTypes);
 db.images = require("./imageModel")(sequelize, DataTypes);
+db.documents = require("./documentModel")(sequelize, DataTypes);
 db.participants = require("./participantsModel")(sequelize, DataTypes);
 db.participant_cagnotte = require("./participant_cagnotteModel")(sequelize, DataTypes);
 
