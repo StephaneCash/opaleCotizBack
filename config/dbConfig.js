@@ -1,9 +1,9 @@
 module.exports = {
-    HOST: "127.0.0.1",
-    USER: "root",
-    PASSWORD: "opale",
-    DB: "ligabloprod",
-    DIALECT: "mysql",
+    HOST: process.env.DB_HOST,
+    USER: process.env.DB_USER,
+    PASSWORD: process.env.DB_PASSWORD,
+    DB: process.env.DB_NAME,
+    DIALECT: process.env.DIALECT,
 
     pool: {
         max: 5,

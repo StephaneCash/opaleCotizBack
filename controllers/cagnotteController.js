@@ -108,7 +108,7 @@ const updateCagnotte = async (req, res) => {
         let findCagnotte = await db.cagnottes.findOne({ where: { id: id } });
 
         if (findCagnotte) {
-            const { title, description, link, categorieId, montant, devise } = req.body;
+            const { title, description, link, categorieId, montant, devise, montantRecolte } = req.body;
 
             if (req.file) {
                 let cagnotteUpdate = await findCagnotte.update({
@@ -118,6 +118,7 @@ const updateCagnotte = async (req, res) => {
                     categorieId: categorieId,
                     devise: devise,
                     montant: montant,
+                    montantRecolte: montantRecolte,
                     url: `api/${req.file.path}`
                 }, {
                     where: { id: id }

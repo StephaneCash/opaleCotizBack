@@ -4,7 +4,10 @@ require('dotenv').config({ path: './config/.env' });
 const cors = require('cors');
 const bodyParser = require('body-parser');
 
-app.use(cors());
+app.use(cors({
+    origin: process.env.CLIENT_URL
+}));
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.json());
@@ -28,7 +31,7 @@ app.use("/api/documents-admin", documentsRoutes);
 
 app.use("/api/uploads", express.static('./uploads'));
 
-const PORT = 5006;
+const PORT = process.env.PORT;
 app.listen(PORT, () => {
     console.log("Le serveur tourne sur le port ", + PORT);
 });

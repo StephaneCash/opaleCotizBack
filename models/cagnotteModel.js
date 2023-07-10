@@ -32,6 +32,10 @@ module.exports = (sequelize, DataTypes) => {
         devise: {
             type: DataTypes.STRING,
             allowNull: true,
+        },
+        montantRecolte: {
+            type: DataTypes.INTEGER,
+            allowNull: true,
         }
     });
 
