@@ -148,8 +148,6 @@ const deleteTalent = async (req, res) => {
     }
 };
 
-
-
 module.exports = {
     getAllTalents,
     createTalent,
