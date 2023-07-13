@@ -110,4 +110,3 @@ module.exports = {
     categorieUpdated,
     deleteCategorie
 }
-
