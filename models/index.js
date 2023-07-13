@@ -39,6 +39,17 @@ db.documents = require("./documentModel")(sequelize, DataTypes);
 db.participants = require("./participantsModel")(sequelize, DataTypes);
 db.participant_cagnotte = require("./participant_cagnotteModel")(sequelize, DataTypes);
 
+db.talents = require("./talentModel")(sequelize, DataTypes);
+db.transactions_talent = require("./transactionTalentModel")(sequelize, DataTypes);
+
+// RELATION 1-N TALENT / TRANSACTION
+db.talents.hasMany(db.transactions_talent, { as: 'transactions', });
+
+db.transactions_talent.belongsTo(db.talents, {
+    foreignKey: "talentId",
+    as: 'talent'
+});
+
 // RELATION 1-N CATEGORIE / CAGNOTTE
 db.categories.hasMany(db.cagnottes, { as: 'cagnottes', });
 
