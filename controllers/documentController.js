@@ -101,4 +101,3 @@ module.exports = {
     DocumentUpdated,
     deleteDocument
 }
-
