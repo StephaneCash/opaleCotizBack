@@ -35,6 +35,7 @@ app.use("/api/transactions", transactionsRoutes);
 
 app.use("/api/uploads", express.static('./uploads'));
 
+
 const PORT = process.env.PORT;
 app.listen(PORT, () => {
     console.log("Le serveur tourne sur le port ", + PORT);
