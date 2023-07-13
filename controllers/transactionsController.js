@@ -111,7 +111,6 @@ const deleteTransaction = async (req, res) => {
         } else {
             res.status(404).json({ message: "Transaction non trouvée avec l'id : " + id });
         }
-
     } catch (error) {
         return res.status(500).json({ message: error });
     }
