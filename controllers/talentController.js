@@ -16,7 +16,7 @@ const getAllTalents = async (req, res) => {
     } catch (error) {
         return res.status(500).json({
             message: error
-        })
+        });
     }
 };
 
@@ -47,7 +47,7 @@ const createTalent = async (req, res) => {
                         as: "transactions"
                     }
                 ]
-            })
+            });
             res.status(201).json(findTalent);
         } else {
             let newTalent = await db.talents.create(req.body);
