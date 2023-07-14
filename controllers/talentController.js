@@ -22,7 +22,7 @@ const getAllTalents = async (req, res) => {
 
 const createTalent = async (req, res) => {
     try {
-        const { nom, prenom, email, numTel, dateNaissance, commune, occupation, categorie, montant } = req.body;
+        const { nom, prenom, email, numTel, dateNaissance, commune, occupation, categorie, montant, modePaiement } = req.body;
         if (req.file) {
             let newTalent = await db.talents.create({
                 nom,
@@ -39,6 +39,7 @@ const createTalent = async (req, res) => {
             await db.transactions_talent.create({
                 montant: montant,
                 talentId: newTalent.id,
+                modePaiement: modePaiement,
             });
             let findTalent = await db.talents.findByPk(newTalent.id, {
                 include: [

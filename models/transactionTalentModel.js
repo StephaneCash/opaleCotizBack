@@ -3,6 +3,9 @@ module.exports = (sequelize, DataTypes) => {
         montant: {
             type: DataTypes.INTEGER,
         },
+        modePaiement: {
+            type: DataTypes.STRING
+        }
     });
 
     return Transaction;
