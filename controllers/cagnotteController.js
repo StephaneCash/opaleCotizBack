@@ -124,7 +124,7 @@ const updateCagnotte = async (req, res) => {
                     where: { id: id }
                 });
                 if (cagnotteUpdate) {
-                    let findCagnotte = await db.cagnottes.findOne({ where: { id: id } });
+                    let findCagnotte = await db.cagnottes.findByPk(id, {include: [{model: db.categories, as: "categorie"}]});
                     res.status(200).json(findCagnotte);
                 }
             } else {
@@ -132,8 +132,8 @@ const updateCagnotte = async (req, res) => {
                     where: { id: id }
                 });
                 if (cagnotteUpdate) {
-                    let findCagnotte = await db.cagnottes.findOne({ where: { id: id } });
-                    res.status(200).json({ message: "Cagnotte a été modifié avec succès", data: findCagnotte });
+                    let findCagnotte = await db.cagnottes.findByPk(id, {include: [{model: db.categories, as: "categorie"}]});
+                    res.status(200).json(findCagnotte);
                 }
             }
         } else {

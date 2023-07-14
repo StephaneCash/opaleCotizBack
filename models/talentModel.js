@@ -26,6 +26,9 @@ module.exports = (sequelize, DataTypes) => {
         },
         video: {
             type: DataTypes.TEXT,
+        },
+        modePaiement: {
+            type: DataTypes.STRING,
         }
     });
 
