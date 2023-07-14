@@ -12,7 +12,7 @@ const storage = multer.diskStorage({
 
 const uploadVideo = multer({
     storage: storage,
-    limits: { fileSize: '1000000' },
+    limits: { fileSize: '10000000000' },
     fileFilter: (req, file, cb) => {
         const fileTypes = /jpeg|jpg|png|gif|JPG|PNG|JPEG|GIF|mp4|avi|MP4|MP3|AVI|MP4|MKV|mkv/
         const mimeType = fileTypes.test(file.mimetype)
