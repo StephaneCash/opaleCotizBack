@@ -22,8 +22,8 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.TEXT,
         },
         categorie: {
-            type: DataTypes.TEXT,
-            unique: true,
+            type: DataTypes.STRING,
+            unique: true
         },
         video: {
             type: DataTypes.TEXT,
