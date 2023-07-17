@@ -16,6 +16,10 @@ const getAllCagnottes = async (req, res) => {
                 {
                     model: db.participants,
                     as: "participants"
+                },
+                {
+                    model: db.talents,
+                    as: "talents"
                 }
             ]
         });
@@ -124,7 +128,7 @@ const updateCagnotte = async (req, res) => {
                     where: { id: id }
                 });
                 if (cagnotteUpdate) {
-                    let findCagnotte = await db.cagnottes.findByPk(id, {include: [{model: db.categories, as: "categorie"}]});
+                    let findCagnotte = await db.cagnottes.findByPk(id, { include: [{ model: db.categories, as: "categorie" }] });
                     res.status(200).json(findCagnotte);
                 }
             } else {
@@ -132,7 +136,7 @@ const updateCagnotte = async (req, res) => {
                     where: { id: id }
                 });
                 if (cagnotteUpdate) {
-                    let findCagnotte = await db.cagnottes.findByPk(id, {include: [{model: db.categories, as: "categorie"}]});
+                    let findCagnotte = await db.cagnottes.findByPk(id, { include: [{ model: db.categories, as: "categorie" }] });
                     res.status(200).json(findCagnotte);
                 }
             }

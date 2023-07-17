@@ -8,6 +8,10 @@ const getAllTalents = async (req, res) => {
                 {
                     model: db.transactions_talent,
                     as: "transactions"
+                },
+                {
+                    model: db.cagnottes,
+                    as: "cagnotte"
                 }
             ]
         });
@@ -22,7 +26,9 @@ const getAllTalents = async (req, res) => {
 
 const createTalent = async (req, res) => {
     try {
-        const { nom, prenom, email, numTel, dateNaissance, commune, occupation, categorie, montant, modePaiement } = req.body;
+        const { nom, prenom, email, numTel, dateNaissance, commune, occupation, categorie, montant,
+            modePaiement, typePaiement, cagnotteId } = req.body;
+            console.log(req.body)
         if (req.file) {
             let newTalent = await db.talents.create({
                 nom,
@@ -33,6 +39,7 @@ const createTalent = async (req, res) => {
                 commune,
                 occupation,
                 categorie,
+                cagnotteId: cagnotteId,
                 video: `api/${req.file.path}`
             });
 
@@ -40,12 +47,17 @@ const createTalent = async (req, res) => {
                 montant: montant,
                 talentId: newTalent.id,
                 modePaiement: modePaiement,
+                typePaiement: typePaiement
             });
             let findTalent = await db.talents.findByPk(newTalent.id, {
                 include: [
                     {
                         model: db.transactions_talent,
                         as: "transactions"
+                    },
+                    {
+                        model: db.cagnottes,
+                        as: "cagnotte"
                     }
                 ]
             });

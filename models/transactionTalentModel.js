@@ -5,6 +5,9 @@ module.exports = (sequelize, DataTypes) => {
         },
         modePaiement: {
             type: DataTypes.STRING
+        },
+        typePaiement: {
+            type: DataTypes.STRING
         }
     });
 
